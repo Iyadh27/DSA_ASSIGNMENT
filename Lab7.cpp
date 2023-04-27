@@ -6,7 +6,7 @@ struct node {
   struct node *left, *right;
 };
 
-// Inorder traversal
+// Inorder traversal function
 void traverseInOrder(struct node *root) {
   if (root != NULL) {
     traverseInOrder(root->left);
@@ -15,9 +15,10 @@ void traverseInOrder(struct node *root) {
   }
 }
 
-// Insert a node
+// Insert a node function
 struct node *insertNode(struct node *node, int key) {
-  // If the tree is empty, return a new node
+  // If the tree is empty, create a new node
+  
   if (node == NULL) {
     struct node *newNode = new struct node();
     newNode->key = key;
@@ -25,18 +26,20 @@ struct node *insertNode(struct node *node, int key) {
     return newNode;
   }
 
-  // Otherwise, recur down the tree
-  if (key < node->key) {
+  // Otherwise, recur down the tree and then insert the key
+  
+  if (key <= node->key) {
     node->left = insertNode(node->left, key);
   } else if (key > node->key) {
     node->right = insertNode(node->right, key);
   }
 
-  // Return the (unchanged) node pointer
+  // Return the same unchanged node pointer to the main function
   return node;
 }
 
-// Deleting a node
+// Deleting a node from the tree
+
 struct node *deleteNode(struct node *root, int key) {
   // Base case
   if (root == NULL) {
@@ -49,18 +52,21 @@ struct node *deleteNode(struct node *root, int key) {
   } else if (key > root->key) {
     root->right = deleteNode(root->right, key);
   } else {
+    
     // Node with only one child or no child
     if (root->left == NULL) {
       struct node *temp = root->right;
       delete root;
       return temp;
+      
     } else if (root->right == NULL) {
       struct node *temp = root->left;
       delete root;
       return temp;
     }
 
-    // Node with two children
+    // For a node with 2 children
+    
     struct node *temp = root->right;
     while (temp->left != NULL) {
       temp = temp->left;
@@ -69,7 +75,7 @@ struct node *deleteNode(struct node *root, int key) {
     root->right = deleteNode(root->right, temp->key);
   }
 
-  return root;
+  return root;    //return root
 }
 
 // Driver code
