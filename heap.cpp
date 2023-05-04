@@ -67,11 +67,12 @@ int main()
     int heap_arr[n];
 
    
-// generate  n no. of random array values
-   srand(time(NULL));
-   for (int i = 0; i < n; i++) {
-      heap_arr[i] = rand() % 100;
-   }
+// get user input for array values
+    cout << "Enter array values:" << endl;
+    for (int i = 0; i < n; i++) {
+        cout << "arr[" << i << "]: ";
+        cin >> heap_arr[i];
+    }
 
     cout << "Input array:" << endl;
     displayArray(heap_arr, n);
